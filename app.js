@@ -405,7 +405,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ============================
     // PAYMENT CONFIG
     // ============================
-    let paymentConfig = { amount: 3000, indoAmount: 10000 };
+    let paymentConfig = { amount: 15000, indoAmount: 25000 };
     fetch(API_BASE + '/api/payment-config').then(r => r.json()).then(data => {
         if (data && data.amount) paymentConfig = data;
     }).catch(() => {});
@@ -473,7 +473,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (btnCheckPayment) btnCheckPayment.style.display = 'none';
 
         const isIndo = type === 'indo';
-        const fullAmount = isIndo ? (paymentConfig.indoAmount || 10000) : (paymentConfig.amount || 3000);
+        const fullAmount = isIndo ? (paymentConfig.indoAmount || 25000) : (paymentConfig.amount || 15000);
 
         if (modalTitle) modalTitle.textContent = isIndo ? 'Premium Indo' : 'Premium Access';
         if (modalIndoBadge) modalIndoBadge.style.display = isIndo ? 'inline-block' : 'none';
@@ -504,7 +504,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btnProceedPayment.addEventListener('click', async () => {
             if (btnProceedPayment.disabled) return;
             const isIndo = currentPremiumType === 'indo';
-            const fullAmount = isIndo ? (paymentConfig.indoAmount || 10000) : (paymentConfig.amount || 3000);
+            const fullAmount = isIndo ? (paymentConfig.indoAmount || 25000) : (paymentConfig.amount || 15000);
             const amount = appliedPromoDiscount > 0 ? Math.round(fullAmount * (100 - appliedPromoDiscount) / 100) : fullAmount;
 
             const orderId = 'ORD-RAIKHS-' + Date.now() + Math.floor(Math.random() * 1000);
