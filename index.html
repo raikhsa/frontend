@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raikhsapedia | Premium Netflix Access</title>
+    <meta name="description" content="Raikhsapedia - Akses Netflix premium dengan token otomatis. Support Mobile, Desktop, dan Smart TV.">
+    <meta property="og:title" content="Raikhsapedia | Premium Netflix Access">
+    <meta property="og:description" content="Generate token Netflix premium. Gratis & berbayar, support semua perangkat.">
+    <meta name="theme-color" content="#7c3aed">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-elements">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+        <div class="grid-overlay"></div>
+    </div>
+
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo-wrap">
+                <div class="logo-icon">R</div>
+                <div class="logo">Raikhs<span class="highlight">apedia</span></div>
+            </div>
+            <div class="device-badge" id="device-badge">
+                <span class="device-icon" id="device-icon">💻</span>
+                <span id="device-label">Mendeteksi perangkat...</span>
+            </div>
+            <p class="subtitle"><span id="typewriter-text"></span><span id="typewriter-cursor" class="cursor-blink">|</span></p>
+        </header>
+
+        <!-- Main Card -->
+        <main class="generator-card">
+            <div class="card-header">
+                <h2>Generate Token</h2>
+                <div class="status-indicator" id="status-indicator">
+                    <span class="dot"></span>
+                    <span class="status-text" id="status-text">Ready</span>
+                </div>
+            </div>
+
+            <!-- Result Container (hidden initially) -->
+            <div class="card-content" id="result-container" style="display: none;">
+
+                <!-- Skeleton Loader -->
+                <div id="skeleton-loader" class="skeleton-container">
+                    <div class="skeleton-account">
+                        <div class="skeleton-row"><div class="skeleton skeleton-label"></div><div class="skeleton skeleton-value"></div></div>
+                        <div class="skeleton-row"><div class="skeleton skeleton-label"></div><div class="skeleton skeleton-value"></div></div>
+                        <div class="skeleton-row"><div class="skeleton skeleton-label"></div><div class="skeleton skeleton-value"></div></div>
+                        <div class="skeleton-row"><div class="skeleton skeleton-label"></div><div class="skeleton skeleton-value"></div></div>
+                    </div>
+                    <div class="skeleton-token">
+                        <div class="skeleton skeleton-block"></div>
+                        <div class="skeleton skeleton-block"></div>
+                    </div>
+                </div>
+
+                <!-- Live Data -->
+                <div id="live-data" style="display: none;">
+                    <!-- Account Info -->
+                    <div class="account-details">
+                        <div class="detail-group">
+                            <span class="label">Netflix Name</span>
+                            <span class="value" id="val-name">--</span>
+                        </div>
+                        <div class="detail-group">
+                            <span class="label">Plan</span>
+                            <span class="value highlight-text" id="val-plan">--</span>
+                        </div>
+                        <div class="detail-group">
+                            <span class="label">Region</span>
+                            <span class="value" id="val-country">--</span>
+                        </div>
+                        <div class="detail-group">
+                            <span class="label">Next Billing</span>
+                            <span class="value" id="val-billing">--</span>
+                        </div>
+                    </div>
+
+                    <!-- Auto Login Link -->
+                    <div class="token-container">
+                        <div class="token-header">
+                            <span class="label">1. Auto-Login Link</span>
+                            <div style="display: flex; gap: 6px; align-items: center;">
+                                <button class="btn-copy-small btn-netflix" id="btn-trigger-netflix" style="display: none;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z"/></svg>
+                                    Buka di Netflix
+                                </button>
+                                <button class="btn-copy-small" id="btn-copy-link">Copy Link</button>
+                            </div>
+                        </div>
+                        <div class="token-info">
+                            <span class="device-info-text" id="trigger-device-info">Klik Copy Link atau tekan Buka di Netflix.</span>
+                        </div>
+                        <textarea id="token-link" readonly spellcheck="false" style="height: 60px; font-weight: bold;"></textarea>
+                    </div>
+
+                    <!-- Smart TV -->
+                    <div class="token-container">
+                        <div class="token-header">
+                            <span class="label">2. Smart TV Login (TV Code)</span>
+                            <a href="https://www.netflix.com/tv8" target="_blank" rel="noopener" class="btn-copy-small btn-tv" style="text-decoration: none;">Open TV8</a>
+                        </div>
+                        <div class="token-info">
+                            <span class="device-info-text">Buka Netflix di Smart TV → Sign In from Web → masukkan 8-digit code.</span>
+                        </div>
+                    </div>
+
+                    <!-- Raw Cookie -->
+                    <div class="token-container" id="raw-cookie-container">
+                        <div class="token-header">
+                            <span class="label">Raw NF Token (For Extensions)</span>
+                            <button class="btn-copy-small" id="btn-copy-cookie">Copy Raw</button>
+                        </div>
+                        <textarea id="token-data" readonly spellcheck="false" style="height: 50px;"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="card-actions">
+                <!-- Random (Free) -->
+                <button class="btn-generate" id="btn-generate">
+                    <span class="btn-left">
+                        <span class="btn-icon btn-icon-random">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"></polyline><line x1="4" y1="20" x2="21" y2="3"></line><polyline points="21 16 21 21 16 21"></polyline><line x1="15" y1="15" x2="21" y2="21"></line><line x1="4" y1="4" x2="9" y2="9"></line></svg>
+                        </span>
+                        <span class="btn-text-group">
+                            <span class="btn-title">Random Token</span>
+                            <span class="btn-price">Gratis</span>
+                        </span>
+                    </span>
+                    <span class="btn-right">
+                        <span class="loader" style="display: none;"></span>
+                        <span class="btn-arrow">→</span>
+                    </span>
+                </button>
+
+                <!-- Premium -->
+                <button class="btn-generate btn-premium" id="btn-generate-premium">
+                    <span class="btn-left">
+                        <span class="btn-icon btn-icon-premium">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        </span>
+                        <span class="btn-text-group">
+                            <span class="btn-title">Premium Token</span>
+                            <span class="btn-price">Rp3.000 / 30 hari</span>
+                        </span>
+                    </span>
+                    <span class="btn-right">
+                        <span class="loader" style="display: none; border-top-color: var(--primary);"></span>
+                        <span class="btn-arrow">→</span>
+                    </span>
+                </button>
+
+                <!-- Premium Indo -->
+                <button class="btn-generate btn-premium-indo" id="btn-generate-indo">
+                    <span class="btn-left">
+                        <span class="btn-icon btn-icon-indo">
+                            🇮🇩
+                        </span>
+                        <span class="btn-text-group">
+                            <span class="btn-title">Premium Indo</span>
+                            <span class="btn-price">Rp10.000 / 30 hari</span>
+                        </span>
+                    </span>
+                    <span class="btn-right">
+                        <span class="badge-recomend">Recommended</span>
+                        <span class="loader" style="display: none; border-top-color: var(--gold);"></span>
+                        <span class="btn-arrow">→</span>
+                    </span>
+                </button>
+            </div>
+        </main>
+
+        <footer>
+            <p>© 2026 Raikhsapedia. All rights reserved.</p>
+            <p class="footer-sub">Digunakan untuk edukasi & keperluan pribadi.</p>
+        </footer>
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="modal-overlay" id="payment-modal">
+        <div class="modal-content" style="position: relative;">
+            <button id="btn-close-payment-x" class="modal-close-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+
+            <h2 class="modal-title">
+                <span id="modal-title">Premium Access</span>
+                <span id="modal-indo-badge" class="indo-badge" style="display:none;">INDO 🇮🇩</span>
+            </h2>
+
+            <!-- Payment Detail -->
+            <div id="payment-detail">
+                <p class="modal-desc" id="payment-desc">Lengkapi detail pembayaran kamu di bawah ini.</p>
+
+                <div class="payment-summary">
+                    <div class="payment-row">
+                        <span class="payment-label" id="detail-item-name">Premium Token</span>
+                        <span class="payment-value" id="detail-original-price">Rp 3.000</span>
+                    </div>
+                    <div class="payment-row" id="detail-discount-row" style="display: none;">
+                        <span class="payment-label discount-label">Diskon</span>
+                        <span class="payment-value discount-value" id="detail-discount-amount">-Rp 0</span>
+                    </div>
+                    <div id="detail-promo-badge" style="display: none; margin-top: 6px;">
+                        <span class="promo-tag" id="detail-promo-text" title="Klik untuk hapus">PROMO ✕</span>
+                    </div>
+                    <div class="payment-divider"></div>
+                    <div class="payment-row">
+                        <span class="payment-label" style="color: #fff; font-weight: 700;">Total Bayar</span>
+                        <span class="payment-total" id="detail-total-price">Rp 3.000</span>
+                    </div>
+                </div>
+
+                <!-- Promo Input -->
+                <div class="promo-input-wrap">
+                    <input type="text" id="promo-code-input" placeholder="KODE PROMO" autocomplete="off">
+                    <button id="btn-apply-promo">Apply</button>
+                </div>
+
+                <button id="btn-proceed-payment" class="btn-proceed">
+                    <span id="proceed-text">Lanjut Pembayaran</span>
+                    <span class="loader" id="proceed-loader" style="width: 16px; height: 16px; border-width: 2px; border-top-color: #000; border-right-color: rgba(0,0,0,0.2); border-bottom-color: rgba(0,0,0,0.2); border-left-color: rgba(0,0,0,0.2); display: none;"></span>
+                </button>
+            </div>
+
+            <!-- QRIS View -->
+            <div id="payment-qris" style="display: none;">
+                <p class="modal-desc">Scan QRIS untuk menyelesaikan pembayaran.</p>
+
+                <div id="qris-container" class="qris-box">
+                    <div id="qris-loader" class="qris-loader">
+                        <span class="loader" style="width: 22px; height: 22px; border-color: rgba(255,255,255,0.1); border-top-color: var(--primary);"></span>
+                        <span style="color: var(--text-muted); font-size: 0.75rem;">Generating QRIS...</span>
+                    </div>
+                    <img id="qris-image" src="" alt="QRIS Payment" style="width: 100%; max-width: 250px; max-height: 250px; height: auto; display: none; margin-bottom: 0.8rem; border-radius: 8px; object-fit: contain;">
+                    <div id="qris-amount-container" style="display: none; text-align: center;">
+                        <div class="qris-label">Total Bayar</div>
+                        <div class="qris-amount" id="qris-amount-text">Rp -</div>
+                    </div>
+                </div>
+
+                <button id="btn-check-payment" class="btn-proceed" style="display: none;">
+                    <span class="loader" id="check-loader" style="width: 16px; height: 16px; border-width: 2px; border-top-color: #000; border-right-color: rgba(0,0,0,0.2); border-bottom-color: rgba(0,0,0,0.2); border-left-color: rgba(0,0,0,0.2); display: none;"></span>
+                    <span id="check-text">Saya Sudah Bayar ✓</span>
+                </button>
+
+                <div class="qris-actions">
+                    <button id="btn-back-detail" class="btn-ghost">← Kembali</button>
+                    <button id="btn-cancel-payment" class="btn-ghost" style="text-decoration: underline;">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Info Modal -->
+    <div class="modal-overlay" id="info-modal">
+        <div class="modal-content info-modal-content" style="text-align: left; max-width: 500px;">
+            <div class="modal-header-row">
+                <h2 class="modal-title" style="margin: 0; font-size: 1.3rem;">Ketentuan & Panduan</h2>
+                <button id="btn-close-info-x" class="modal-close-btn" style="position: static;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+
+            <div class="info-scroll">
+                <p style="margin-bottom: 1rem;"><strong>NFToken Raikhsapedia</strong> adalah sesi otentikasi cookie otomatis yang memungkinkan kamu masuk ke Netflix tanpa email atau password.</p>
+
+                <div class="info-stats">
+                    <div class="info-stat">
+                        <div class="stat-label">Masa Aktif</div>
+                        <div class="stat-value">Maks. 30 Hari</div>
+                    </div>
+                    <div class="info-stat">
+                        <div class="stat-label">Batas Per Token</div>
+                        <div class="stat-value">1 Device</div>
+                    </div>
+                </div>
+
+                <h3 class="info-section-title">Perbedaan Token:</h3>
+                <div class="info-tiers">
+                    <div class="tier-item tier-free">
+                        <div class="tier-name">Random Token — <span>Gratis</span></div>
+                        <div class="tier-desc">Token acak (non-premium). Kecepatan & region tidak dijamin.</div>
+                    </div>
+                    <div class="tier-item tier-premium">
+                        <div class="tier-name">Premium Token — <span>Rp3.000</span></div>
+                        <div class="tier-desc">Token premium global. Kualitas tinggi, region manapun, server cepat.</div>
+                    </div>
+                    <div class="tier-item tier-indo">
+                        <div class="tier-name">Premium Indo 🇮🇩 — <span>Rp10.000</span></div>
+                        <div class="tier-desc">Khusus region Indonesia. Streaming stabil, latency rendah, prioritas tertinggi.</div>
+                    </div>
+                </div>
+
+                <h3 class="info-section-title">Cara Menggunakan:</h3>
+                <ol class="info-list">
+                    <li>Klik tombol <strong>Random Token</strong> atau bayar untuk <strong>Premium Token</strong>.</li>
+                    <li>Tunggu proses selesai, lalu klik <strong>Copy Link</strong> atau <strong>Buka di Netflix</strong>.</li>
+                    <li>Buka tab browser baru, paste link ke address bar → otomatis login.</li>
+                    <li>Untuk Smart TV, buka <strong>netflix.com/tv8</strong> dan masukkan code.</li>
+                </ol>
+
+                <h3 class="info-section-title">Panduan Anti-Limit:</h3>
+                <ul class="info-list">
+                    <li><strong>Hanya 1 Device.</strong> Token invalid jika dibagikan ke perangkat lain.</li>
+                    <li><strong>Jangan ubah pengaturan.</strong> Dilarang ganti password, email, atau PIN.</li>
+                    <li><strong>Jangan tambah/hapus profil.</strong> Gunakan profil yang tersedia.</li>
+                    <li><strong>Jangan Log Out.</strong> Tutup tab saja jika selesai menonton.</li>
+                    <li><strong>Gunakan ekstensi Cookie-Editor</strong> untuk import token mentah.</li>
+                </ul>
+
+                <div class="warning-box">
+                    <em>⚠️ Pelanggaran ketentuan akan membuat token hangus seketika dan device/IP dapat diblokir sistem.</em>
+                </div>
+            </div>
+
+            <button id="btn-understand-info" class="btn-understand">Saya Mengerti ✓</button>
+        </div>
+    </div>
+
+    <!-- Floating Buttons -->
+    <div class="fab-container">
+        <a href="https://t.me/raikhsapedia" target="_blank" rel="noopener" class="fab-btn fab-contact" aria-label="Contact via Telegram" title="Telegram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        </a>
+        <button id="btn-open-info" class="fab-btn fab-help" aria-label="Buka Panduan" title="Panduan">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+        </button>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        <span id="toast-message">Copied!</span>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

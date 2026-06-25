@@ -1,0 +1,4 @@
+# Folder backend tidak di-deploy ke Vercel (backend ada di Railway)
+backend/
+node_modules/
+.env
