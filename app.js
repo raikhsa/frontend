@@ -429,6 +429,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const proceedLoader        = document.getElementById('proceed-loader');
     const qrisImage            = document.getElementById('qris-image');
     const qrisLoader           = document.getElementById('qris-loader');
+    const qrisContainer        = document.getElementById('qris-container');
     const qrisAmountContainer  = document.getElementById('qris-amount-container');
     const qrisAmountText       = document.getElementById('qris-amount-text');
     const btnCheckPayment      = document.getElementById('btn-check-payment');
@@ -468,6 +469,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         paymentDetail.style.display = 'block';
         paymentQris.style.display   = 'none';
+        if (qrisContainer) qrisContainer.classList.remove('loaded');
         if (btnCheckPayment) btnCheckPayment.style.display = 'none';
 
         const isIndo = type === 'indo';
@@ -523,6 +525,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (qrisData.qris_string) {
                     paymentDetail.style.display = 'none';
                     paymentQris.style.display   = 'block';
+                    if (qrisContainer) qrisContainer.classList.remove('loaded');
 
                     // Prioritaskan foto QRIS yang diupload admin.
                     // Jika URL relatif (/uploads/...), tambahkan API_BASE (Railway URL)
@@ -533,7 +536,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         : null;
                     const qrUrl = resolvedQrisImage
                         ? resolvedQrisImage
-                        : `https://api.qrserver.com/v1/create-qr-code/?size=350x350&color=7c3aed&bgcolor=070710&data=${encodeURIComponent(qrisData.qris_string)}`;
+                        : `https://api.qrserver.com/v1/create-qr-code/?size=350x350&color=7c3aed&bgcolor=ffffff&data=${encodeURIComponent(qrisData.qris_string)}`;
 
                     if (qrisLoader) qrisLoader.style.display = 'flex';
                     if (qrisImage) qrisImage.style.display = 'none';
@@ -549,13 +552,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         qrisImage.onload = () => {
                             if (qrisLoader) qrisLoader.style.display = 'none';
                             qrisImage.style.display = 'block';
+                            if (qrisContainer) qrisContainer.classList.add('loaded');
                             if (qrisAmountContainer) qrisAmountContainer.style.display = 'block';
                             if (btnCheckPayment) btnCheckPayment.style.display = 'flex';
                             if (qrisAmountText) qrisAmountText.textContent = 'Rp ' + (qrisData.total_payment || amount).toLocaleString('id-ID');
                         };
                         qrisImage.onerror = () => {
                             // Jika foto gagal load, fallback ke QR generated
-                            const fallbackUrl = `https://api.qrserver.com/v1/create-qr-code/?size=350x350&color=7c3aed&bgcolor=070710&data=${encodeURIComponent(qrisData.qris_string)}`;
+                            const fallbackUrl = `https://api.qrserver.com/v1/create-qr-code/?size=350x350&color=7c3aed&bgcolor=ffffff&data=${encodeURIComponent(qrisData.qris_string)}`;
                             qrisImage.src = fallbackUrl;
                         };
                         qrisImage.src = qrUrl;

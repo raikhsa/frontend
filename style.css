@@ -1119,6 +1119,30 @@ footer {
     justify-content: center;
     position: relative;
     min-height: 220px;
+    transition: all 0.3s ease;
+}
+
+.qris-box.loaded {
+    background: #ffffff;
+    border-color: rgba(124, 58, 237, 0.4);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    padding: 12px;
+    min-height: auto;
+    height: 300px;
+}
+
+#qris-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 12px;
+}
+
+@media (max-width: 500px) {
+    .qris-box.loaded {
+        height: 260px;
+        padding: 8px;
+    }
 }
 
 .qris-loader {
