@@ -1,23 +1,23 @@
 /* ============================================
-   RAIKHSAPEDIA - Premium Netflix Access
-   Color Theme: Deep Purple + Violet
+   RAIKHSAPEDIA - Premium Netflix Access Pass
+   Theme: Cinematic Ticket Stub (Charcoal & Netflix Red/Gold)
    ============================================ */
 
 :root {
-    --bg-color: #070710;
-    --card-bg: rgba(15, 15, 30, 0.7);
-    --card-border: rgba(124, 58, 237, 0.12);
-    --primary: #7c3aed;
-    --primary-light: #a78bfa;
-    --primary-glow: rgba(124, 58, 237, 0.35);
-    --secondary: #1e1b4b;
-    --accent: #06b6d4;
-    --accent-glow: rgba(6, 182, 212, 0.3);
-    --text-main: #f1f0ff;
-    --text-muted: #6b7280;
+    --bg-color: #08080a;
+    --card-bg: #121215;
+    --card-border: rgba(229, 9, 20, 0.2);
+    --primary: #e50914;
+    --primary-light: #ef4444;
+    --primary-glow: rgba(229, 9, 20, 0.2);
+    --secondary: #1a1a1e;
+    --accent: #fbbf24;
+    --accent-glow: rgba(251, 191, 36, 0.15);
+    --text-main: #f4f4f5;
+    --text-muted: #8e8e93;
     --success: #10b981;
     --error: #ef4444;
-    --gold: #f59e0b;
+    --gold: #fbbf24;
     --netflix-red: #e50914;
 }
 
@@ -48,8 +48,8 @@ body::before {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
     background-image:
-        linear-gradient(rgba(124, 58, 237, 0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(124, 58, 237, 0.04) 1px, transparent 1px);
+        linear-gradient(rgba(229, 9, 20, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(229, 9, 20, 0.02) 1px, transparent 1px);
     background-size: 44px 44px;
     z-index: 0;
     mask-image: radial-gradient(ellipse at 50% 0%, black 20%, transparent 70%);
@@ -92,7 +92,7 @@ body::before {
     bottom: -25%;
     right: -10%;
     width: 55vw; height: 55vw;
-    background: radial-gradient(circle, rgba(6, 182, 212, 0.7) 0%, transparent 65%);
+    background: radial-gradient(circle, rgba(251, 191, 36, 0.3) 0%, transparent 65%);
     animation-delay: -12s;
 }
 
@@ -101,7 +101,7 @@ body::before {
     left: 50%;
     transform: translateX(-50%);
     width: 40vw; height: 40vw;
-    background: radial-gradient(circle, rgba(167, 139, 250, 0.5) 0%, transparent 65%);
+    background: radial-gradient(circle, rgba(239, 68, 68, 0.2) 0%, transparent 65%);
     animation-delay: -6s;
     opacity: 0.1;
 }
@@ -199,23 +199,24 @@ header {
 }
 
 .logo {
-    font-size: 2.2rem;
-    font-weight: 800;
-    letter-spacing: -1.5px;
+    font-size: 2.1rem;
+    font-weight: 850;
+    letter-spacing: 1px;
+    text-transform: uppercase;
     line-height: 1;
-    background: linear-gradient(135deg, #e2e8f0, #c4b5fd);
+    background: linear-gradient(135deg, #ffffff, #d4d4d8);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
 .logo .highlight {
-    background: linear-gradient(135deg, var(--primary-light), var(--accent));
+    background: linear-gradient(135deg, var(--primary), var(--accent));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     text-shadow: none;
-    filter: drop-shadow(0 0 20px var(--primary-glow));
+    filter: drop-shadow(0 0 15px rgba(229, 9, 20, 0.4));
 }
 
 /* Device Badge */
@@ -272,38 +273,49 @@ header {
    ============================================ */
 .generator-card {
     background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 24px;
+    border: 1.5px solid var(--card-border);
+    border-radius: 16px;
     padding: 1.85rem;
-    backdrop-filter: blur(60px);
-    -webkit-backdrop-filter: blur(60px);
     box-shadow:
-        inset 0 1px 0 rgba(167, 139, 250, 0.08),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.3),
-        0 30px 60px -15px rgba(0, 0, 0, 0.6),
-        0 0 80px -20px rgba(124, 58, 237, 0.15);
+        0 25px 60px -15px rgba(0, 0, 0, 0.7),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
     position: relative;
-    overflow: hidden;
 }
 
-/* Top glow border */
-.generator-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 15%; right: 15%;
+/* Ticket Divider & Notches */
+.ticket-divider {
+    position: relative;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.5), rgba(6, 182, 212, 0.3), transparent);
+    border-top: 1.5px dashed var(--card-border);
+    margin: 1.5rem -1.85rem;
+    z-index: 5;
 }
 
-/* Subtle corner accent */
-.generator-card::after {
+.ticket-divider::before,
+.ticket-divider::after {
     content: '';
     position: absolute;
-    top: -60px; right: -60px;
-    width: 180px; height: 180px;
-    background: radial-gradient(circle, rgba(124, 58, 237, 0.08), transparent 70%);
+    top: -12px;
+    width: 24px;
+    height: 24px;
+    background: var(--bg-color);
     border-radius: 50%;
-    pointer-events: none;
+    z-index: 10;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
+}
+
+.ticket-divider::before {
+    left: -12px;
+    border-right: 1.5px solid var(--card-border);
+}
+
+.ticket-divider::after {
+    right: -12px;
+    border-left: 1.5px solid var(--card-border);
+}
+
+.modal-content .ticket-divider {
+    margin: 1.5rem -2rem;
 }
 
 .card-header {
@@ -335,8 +347,8 @@ header {
 }
 
 .status-indicator.loading {
-    background: rgba(124, 58, 237, 0.08);
-    border-color: rgba(124, 58, 237, 0.2);
+    background: rgba(229, 9, 20, 0.08);
+    border-color: rgba(229, 9, 20, 0.2);
 }
 
 .status-indicator.loading .dot {
@@ -441,30 +453,30 @@ header {
     border-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Premium Token - Purple CTA */
+/* Premium Token - Netflix Red CTA */
 .btn-premium {
-    background: linear-gradient(135deg, rgba(124, 58, 237, 0.18), rgba(124, 58, 237, 0.06)) !important;
-    border-color: rgba(124, 58, 237, 0.3) !important;
+    background: linear-gradient(135deg, rgba(229, 9, 20, 0.15), rgba(229, 9, 20, 0.05)) !important;
+    border-color: rgba(229, 9, 20, 0.3) !important;
     color: var(--primary-light) !important;
 }
 
 .btn-premium:hover {
-    background: linear-gradient(135deg, rgba(124, 58, 237, 0.28), rgba(124, 58, 237, 0.12)) !important;
-    border-color: rgba(167, 139, 250, 0.5) !important;
-    box-shadow: 0 0 30px rgba(124, 58, 237, 0.2), 0 8px 25px rgba(0, 0, 0, 0.3) !important;
+    background: linear-gradient(135deg, rgba(229, 9, 20, 0.25), rgba(229, 9, 20, 0.1)) !important;
+    border-color: rgba(239, 68, 68, 0.5) !important;
+    box-shadow: 0 0 30px rgba(229, 9, 20, 0.2), 0 8px 25px rgba(0, 0, 0, 0.3) !important;
 }
 
-/* Premium Indo - Cyan/Teal */
+/* Premium Indo - Ticket Gold */
 .btn-premium-indo {
-    background: linear-gradient(135deg, rgba(6, 182, 212, 0.12), rgba(6, 182, 212, 0.04)) !important;
-    border-color: rgba(6, 182, 212, 0.25) !important;
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.12), rgba(251, 191, 36, 0.04)) !important;
+    border-color: rgba(251, 191, 36, 0.25) !important;
     color: var(--accent) !important;
 }
 
 .btn-premium-indo:hover {
-    background: linear-gradient(135deg, rgba(6, 182, 212, 0.22), rgba(6, 182, 212, 0.08)) !important;
-    border-color: rgba(6, 182, 212, 0.45) !important;
-    box-shadow: 0 0 30px rgba(6, 182, 212, 0.15), 0 8px 25px rgba(0, 0, 0, 0.3) !important;
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.22), rgba(251, 191, 36, 0.08)) !important;
+    border-color: rgba(251, 191, 36, 0.45) !important;
+    box-shadow: 0 0 30px rgba(251, 191, 36, 0.15), 0 8px 25px rgba(0, 0, 0, 0.3) !important;
 }
 
 .btn-left {
@@ -489,12 +501,13 @@ header {
 }
 
 .btn-icon-premium {
-    background: rgba(124, 58, 237, 0.15);
+    background: var(--primary-glow);
     color: var(--primary-light);
 }
 
 .btn-icon-indo {
-    background: rgba(6, 182, 212, 0.1);
+    background: var(--accent-glow);
+    color: var(--accent);
 }
 
 .btn-text-group {
@@ -538,7 +551,7 @@ header {
 .badge-recomend {
     font-size: 0.52rem;
     font-weight: 700;
-    background: linear-gradient(135deg, var(--accent), rgba(6,182,212,0.8));
+    background: var(--accent);
     color: #000;
     padding: 2px 8px;
     border-radius: 5px;
@@ -1333,8 +1346,8 @@ footer {
 }
 
 .btn-understand:hover {
-    background: rgba(124, 58, 237, 0.18);
-    box-shadow: 0 0 25px rgba(124, 58, 237, 0.2);
+    background: rgba(229, 9, 20, 0.18);
+    box-shadow: 0 0 25px rgba(229, 9, 20, 0.2);
 }
 
 /* ============================================
@@ -1342,13 +1355,13 @@ footer {
    ============================================ */
 @media (max-width: 500px) {
     .container { padding: 1rem; }
-    .generator-card { padding: 1.35rem; border-radius: 20px; }
+    .generator-card { padding: 1.35rem; border-radius: 16px; }
     .logo { font-size: 1.85rem; letter-spacing: -1px; }
     .logo-icon { width: 36px; height: 36px; font-size: 1.1rem; }
     .account-details { grid-template-columns: 1fr; }
     .btn-title { font-size: 0.88rem; }
     .btn-icon { width: 30px; height: 30px; }
-    .modal-content { padding: 1.5rem; border-radius: 20px; }
+    .modal-content { padding: 1.5rem; border-radius: 16px; }
     .info-stats { grid-template-columns: 1fr 1fr; }
     .card-header h2 { font-size: 1rem; }
 }
@@ -1362,14 +1375,14 @@ footer {
    CUSTOM CURSOR
    ============================================ */
 html {
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='28' viewBox='0 0 22 28'%3E%3Cpath d='M1 1L18 18L11.5 19L9.5 25L7 22L4 25L5.5 18Z' fill='%237c3aed' opacity='0.9'/%3E%3Cpath d='M2 2L18 17L12 18L10 24L7.5 21.5L4.5 24.5L6 18Z' fill='%23a78bfa' opacity='0.4'/%3E%3C/svg%3E") 1 1, auto;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='28' viewBox='0 0 22 28'%3E%3Cpath d='M1 1L18 18L11.5 19L9.5 25L7 22L4 25L5.5 18Z' fill='%23e50914' opacity='0.9'/%3E%3Cpath d='M2 2L18 17L12 18L10 24L7.5 21.5L4.5 24.5L6 18Z' fill='%23fbbf24' opacity='0.4'/%3E%3C/svg%3E") 1 1, auto;
 }
 
 a, button, .btn-generate, .btn-copy-small, .fab-btn,
 select, summary, label[for], [role="button"], input[type="submit"] {
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 22 22'%3E%3Ccircle cx='11' cy='11' r='8' fill='%237c3aed' opacity='0.85'/%3E%3Ccircle cx='11' cy='11' r='3.5' fill='%23ffffff' opacity='0.95'/%3E%3Ccircle cx='11' cy='11' r='1' fill='%237c3aed'/%3E%3C/svg%3E") 11 11, pointer !important;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 22 22'%3E%3Ccircle cx='11' cy='11' r='8' fill='%23e50914' opacity='0.85'/%3E%3Ccircle cx='11' cy='11' r='3.5' fill='%23ffffff' opacity='0.95'/%3E%3Ccircle cx='11' cy='11' r='1' fill='%23e50914'/%3E%3C/svg%3E") 11 11, pointer !important;
 }
 
 input, textarea, [contenteditable="true"] {
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='22' viewBox='0 0 4 22'%3E%3Crect x='0.5' y='0' width='3' height='22' rx='1.5' fill='%237c3aed' opacity='0.9'/%3E%3C/svg%3E") 2 11, text !important;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='22' viewBox='0 0 4 22'%3E%3Crect x='0.5' y='0' width='3' height='22' rx='1.5' fill='%23e50914' opacity='0.9'/%3E%3C/svg%3E") 2 11, text !important;
 }
