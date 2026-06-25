@@ -525,9 +525,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     paymentQris.style.display   = 'block';
 
                     // Prioritaskan foto QRIS yang diupload admin.
+                    // Jika URL relatif (/uploads/...), tambahkan API_BASE (Railway URL)
                     // Fallback ke generate QR dinamis hanya jika belum ada foto.
-                    const qrUrl = qrisData.qris_image
-                        ? qrisData.qris_image
+                    const rawQrisImage = qrisData.qris_image;
+                    const resolvedQrisImage = rawQrisImage
+                        ? (rawQrisImage.startsWith('http') ? rawQrisImage : API_BASE + rawQrisImage)
+                        : null;
+                    const qrUrl = resolvedQrisImage
+                        ? resolvedQrisImage
                         : `https://api.qrserver.com/v1/create-qr-code/?size=350x350&color=7c3aed&bgcolor=070710&data=${encodeURIComponent(qrisData.qris_string)}`;
 
                     if (qrisLoader) qrisLoader.style.display = 'flex';
